@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleInventory", "VehicleInventory\VehicleInventory.csproj", "{E129CE3E-89E7-474E-936F-60D59A5DE045}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VehicleInventory", "VehicleInventory\VehicleInventory.csproj", "{E129CE3E-89E7-474E-936F-60D59A5DE045}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleInventory.Tests", "VehicleInventory.Tests\VehicleInventory.Tests.csproj", "{46E19A68-5B8C-4F69-9849-25B38E784045}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VehicleInventory.Tests", "VehicleInventory.Tests\VehicleInventory.Tests.csproj", "{46E19A68-5B8C-4F69-9849-25B38E784045}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleInventory.web", "VehicleInventory.web\VehicleInventory.web.csproj", "{191B0302-E3C4-477D-B430-1FC76835384A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{46E19A68-5B8C-4F69-9849-25B38E784045}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46E19A68-5B8C-4F69-9849-25B38E784045}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46E19A68-5B8C-4F69-9849-25B38E784045}.Release|Any CPU.Build.0 = Release|Any CPU
+		{191B0302-E3C4-477D-B430-1FC76835384A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{191B0302-E3C4-477D-B430-1FC76835384A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{191B0302-E3C4-477D-B430-1FC76835384A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{191B0302-E3C4-477D-B430-1FC76835384A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

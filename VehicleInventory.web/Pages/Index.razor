@@ -1,0 +1,65 @@
+﻿@page "/"
+@page "/Index"
+@inject VehicleInventory.web.Data.VehicleServices vehicleServices
+
+@inject NavigationManager UriHelper
+
+<h1>Vehicle List</h1>
+<p><a href="/vehicleinformation/">New Vehicle</a></p>
+@if (vehicle == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>VIN</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in vehicle)
+            {
+                <tr>
+                    <th>@item.Make</th>
+                    <td>@item.Model</td>
+                    <td>@item.Year</td>
+                    <td>@item.VIN</td>
+                    <td>
+                        <button type="button" class="btn btn-rounded btn-sm m-0 table-button" @onclick="(() => EditDetails(item.Id))">Edit</button>
+                        <button type="button" class="btn btn-rounded btn-sm m-0 table-button" @onclick="(() => DeleteDetails(item.Id))">Delete</button>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code{
+    [Parameter]
+    public int Id { get; set; }
+    public List<VehicleInventory.Models.Vehicle> vehicle { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        vehicle = await vehicleServices.GetVehicles();
+    }
+    protected async void EditDetails(int id)
+    {
+        Id = id;
+        UriHelper.NavigateTo("/vehicleinformation/" + id);
+    }
+    protected async void DeleteDetails(int id)
+    {
+        Id = id;
+        vehicleServices.DeleteVehicle(Id);
+        OnInitializedAsync();
+    }
+}

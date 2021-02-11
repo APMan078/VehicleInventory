@@ -1,0 +1,94 @@
+﻿@page "/vehicleinformation/{id}"
+@page "/vehicleinformation"
+@inject VehicleInventory.web.Data.VehicleServices vehicleServices
+@inject NavigationManager UriHelper
+
+<p><a href="/">Back to List</a></p>
+<h1>@LabelName</h1>
+<EditForm Model="@vehicle" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary /> 
+
+    <div class="form-group">
+        <label>
+            Make:
+            <InputText class="form-control" @bind-Value="vehicle.Make" />
+        </label>
+    </div>
+    <div class="form-group">
+        <label>
+            Model:
+            <InputText class="form-control" @bind-Value="vehicle.Model" />
+        </label>
+    </div>
+    <div class="form-group">
+        <label>
+            VIN #:
+            <InputText class="form-control" @bind-Value="vehicle.VIN" />
+        </label>
+    </div>
+    <div class="form-group">
+        <label>
+            VIN #:
+            <InputNumber class="form-control" @bind-Value="vehicle.Year" />
+        </label>
+    </div>
+    <div class="form-group">
+        <button class="btn-success" type="submit">Submit</button>
+        <p>@ValidationMessage</p>
+    </div>
+</EditForm>
+@code {
+    [Parameter]
+    public string Id { get; set; }
+    public string LabelName { get; set; }
+    public string ValidationMessage { get; set; }
+    private bool isEdit { get; set; }
+
+    private VehicleInventory.Models.Vehicle vehicle = new Models.Vehicle()
+    {
+        Make = "",
+        Id = 0,
+        Model = "",
+        VIN = "",
+        Year = 0
+    };
+
+    //private VehicleInventory.Models.Vehicle vehicle { get; set; }
+    private EditContext editContext;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (string.IsNullOrEmpty(Id))
+        {
+            LabelName = "Create Vehicle";
+            editContext = new EditContext(vehicle);
+            isEdit = false;
+        }
+        else
+        {
+            LabelName = "Edit Vehicle";
+            vehicle = vehicleServices.GetVehicleById(Convert.ToInt32(Id));
+            editContext = new EditContext(vehicle);
+            isEdit = true;
+
+        }
+    }
+
+    private async void HandleValidSubmit()
+    {
+        var isValid = editContext.Validate();
+        ValidationMessage = "";
+        if (isValid)
+        {
+            vehicleServices.SaveUpdateVehicle(vehicle);
+            UriHelper.NavigateTo("/");
+        }
+        else
+        {
+            ValidationMessage = "Error in saving";
+        }
+
+    }
+
+}
